@@ -1,0 +1,36 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class ChatClient implements ActionListener, Runnable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		if(args.length != 3) {
+			System.out.println("Incorrect arguments.");
+			return;
+		}
+		
+		new ChatClient(args[0], args[1], args[2]);
+	}
+
+	
+	
+	public ChatClient(String serverAddress, String chatName, String password) {
+		String chatName;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+}

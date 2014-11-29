@@ -1,0 +1,71 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+
+public class ChatClient implements ActionListener, Runnable {
+
+	public static void main(String[] args) {
+		if(args.length != 3) {
+			System.out.println("Provide network address of the ChatServer and your chat name and password as 3 command line parameters.");
+			return;
+		}
+		
+		try {
+			new ChatClient(args[0], args[1], args[2]);
+		} catch (Exception e) {
+			System.out.println(e);
+			return;
+		}
+	}
+
+String chatName;
+Socket s;
+DataInputStream  dis;
+DataOutputStream dos;
+	
+	public ChatClient(String serverAddress, String chatName, String password) throws UnknownHostException, IOException {
+		this.chatName = chatName;
+		
+		if ((serverAddress == null)	|| (serverAddress.trim().length() == 0)	|| serverAddress.trim().contains(" ")) {
+			throw new IllegalArgumentException("serverAddress is null, zero length, or contains blank(s)");
+		} else {
+			serverAddress = serverAddress.trim();
+		}
+	
+		if ((chatName == null)	|| (chatName.trim().length() == 0)	|| chatName.trim().contains(" ")) {
+			throw new IllegalArgumentException("chatName is null, zero length, or contains blank(s)");
+		} else {
+			chatName = chatName.trim();
+		}
+		
+		if ((password == null)	|| (password.trim().length() == 0)	|| password.trim().contains(" ")) {
+			throw new IllegalArgumentException("password is null, zero length, or contains blank(s)");
+		} else {
+			password = password.trim();
+		}
+		
+		System.out.println("Connecting to ChatServer at " + serverAddress + " on port 4444");
+		s = new Socket(serverAddress, 4444);
+		System.out.println("Connected to ChatServer!");
+		
+		dos = new DataOutputStream(s.getOutputStream());
+		dos.writeUTF(chatName + "/" + password);
+		dis = new DataInputStream(s.getInputStream());
+		String serverReply = dis.readUTF();
+	}
+
+	@Override
+	public void run() {
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	}
+
+}

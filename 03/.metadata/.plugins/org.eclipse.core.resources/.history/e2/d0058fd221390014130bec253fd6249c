@@ -1,0 +1,68 @@
+import java.io.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+
+public class ChatServer implements Runnable {
+
+	public static void main(String[] args) {
+		
+		if(args.length != 0) {
+			System.out.println("FYI ChatServer does not accept command line parameters.");
+		}
+		
+		try {
+			new ChatServer();
+		} catch (IOException ioe) {
+			System.out.println(ioe);
+		}
+
+	}
+
+ServerSocket ss;	
+int threadNumber = 1;
+DataInputStream dis = null;
+DataOutputStream dos = null;
+
+	public ChatServer() throws IOException {
+		ss = new ServerSocket(4444);				
+		System.out.println("ChatServer is up at " + InetAddress.getLocalHost().getHostAddress() + " on port " + ss.getLocalPort());
+		new Thread(this).start();
+	}
+
+	@Override
+	public void run() {
+		System.out.println("Application thread #" + threadNumber++ + " entering run() to wait for a client to connect.");
+		
+		try {
+			Socket s = ss.accept();
+			System.out.println("A client has connected from " + s.getInetAddress());
+			
+			dis = new DataInputStream(s.getInputStream());
+			String firstMessage = dis.readUTF();
+			dos = new DataOutputStream(s.getOutputStream());
+			
+			if(firstMessage.contains("/") == true) {
+				int slashOffset = firstMessage.indexOf("/");
+				String chatName = firstMessage.substring(0, slashOffset);
+				String password = firstMessage.substring(slashOffset+1, firstMessage.length());
+				System.out.println(chatName + " is attempting to join with password " + password);
+			} else {
+				dos.writeUTF("Sorry - wrong number!");
+				dos.close();
+				return;
+			}
+			
+		} catch (IOException e) {
+			System.out.println("A client connection attempt has failed.");
+			return;
+		}
+		
+		
+	}
+
+
+
+}

@@ -1,0 +1,49 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+
+public class ChatClient implements ActionListener, Runnable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		if(args.length != 3) {
+			System.out.println("Incorrect arguments.");
+			return;
+		}
+		
+		new ChatClient(args[0], args[1], args[2]);
+	}
+
+String chatName;
+Socket s;
+	
+	public ChatClient(String serverAddress, String chatName, String password) throws UnknownHostException, IOException {
+		this.chatName = chatName;
+		
+		if ((serverAddress == null)	|| (serverAddress.trim().length() == 0)	|| serverAddress.trim().contains(" ")) {
+			throw new IllegalArgumentException("serverAddress is null, zero length, or contains blank(s)");
+		} else {
+			serverAddress = serverAddress.trim();
+		}
+		System.out.println("Connecting to ChatServer at " + serverAddress + " on port 4444");
+		s = new Socket(serverAddress, 4444);
+		System.out.println("Connected to ChatServer!");
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+}

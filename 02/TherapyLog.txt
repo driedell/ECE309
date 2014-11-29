@@ -1,0 +1,18 @@
+
+
+Sun Aug 31 00:05:15 EDT 2014
+Question was: "abcd", Therapist answer was: "I don't think so..."
+Question was: "efgh", Therapist answer was: "HELL NO!"
+Question was: "ijkl", Therapist answer was: "Definitely!"
+
+
+Sun Aug 31 00:05:31 EDT 2014
+Question was: "oiawmef", Therapist answer was: "Absolutely!"
+Question was: "owam", Therapist answer was: "Absolutely!"
+Question was: "awofempa", Therapist answer was: "Definitely!"
+
+
+Sun Aug 31 00:06:12 EDT 2014
+Question was: "harry", Therapist answer was: "...Duh."
+Question was: "ron", Therapist answer was: "Does a bear crap in the woods?"
+Question was: "hermione", Therapist answer was: "YEAAAAAHHHH!!!"
